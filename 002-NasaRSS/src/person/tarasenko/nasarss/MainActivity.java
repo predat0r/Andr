@@ -1,8 +1,11 @@
 package person.tarasenko.nasarss;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -10,6 +13,18 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+	//	String url = (String)findViewById(R.string.link);
+		final IotdHandler handler = new IotdHandler();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                handler.processFeed();
+                resetDisplay(handler.getTitle(), handler.getDate(), handler.getImage(), handler.getDescription());
+            }
+        }).start();
+
+
+		System.out.println("All done");
 	}
 
 	@Override
@@ -18,5 +33,22 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	
+	private void resetDisplay(String title, String date, Bitmap image, StringBuffer description) {
+		TextView titleView = (TextView)findViewById(R.id.textTitle);
+		titleView.setText(title);
+		
+		TextView dateView = (TextView)findViewById(R.id.textDate);
+		dateView.setText(date);
+		
+		ImageView imageView = (ImageView)findViewById(R.id.imageD);		
+		imageView.setImageBitmap(image);
+		
+		TextView descriptionView = (TextView)findViewById(R.id.textDesc);
+		descriptionView.setText(description);
+		
+	}
+	
 }
+
+
