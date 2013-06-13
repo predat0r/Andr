@@ -9,20 +9,26 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
+    public boolean refreshed;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 	//	String url = (String)findViewById(R.string.link);
 		final IotdHandler handler = new IotdHandler();
+        refreshed = false;
+
+        while (!refreshed){
         new Thread(new Runnable() {
             @Override
             public void run() {
-                handler.processFeed();
-                resetDisplay(handler.getTitle(), handler.getDate(), handler.getImage(), handler.getDescription());
-            }
-        }).start();
+                refreshed = handler.processFeed();
 
+            }
+        }).start();}
+
+        resetDisplay(handler.getTitle(), handler.getDate(), handler.getImage(), handler.getDescription());
 
 		System.out.println("All done");
 	}
