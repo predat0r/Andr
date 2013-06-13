@@ -31,14 +31,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textTitle"
             android:contentDescription="@string/test_title"
-            android:src="@drawable/test_image" />
+            android:src="@drawable/test_image"
+            android:adjustViewBounds="true"/>
 
         <TextView
             android:id="@+id/textDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/image"
+            android:layout_below="@+id/imageD"
             android:text="@string/test_publication_date"
             android:textColor="@color/title" />
 
