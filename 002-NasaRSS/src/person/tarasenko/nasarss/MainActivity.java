@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-    public boolean refreshed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,24 +16,26 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         //	String url = (String)findViewById(R.string.link);
         final IotdHandler handler = new IotdHandler();
-        refreshed = false;
 
         Thread prcessFeed = new Thread(new Runnable() {
             @Override
             public void run() {
-                refreshed = handler.processFeed();
+                handler.processFeed();
 
             }
         });
 
         prcessFeed.start();
-        while (!prcessFeed.isAlive()){
-            resetDisplay(handler.getTitle(), handler.getDate(), handler.getImage(), handler.getDescription());
+        try {
+            prcessFeed.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-
+        resetDisplay(handler.getTitle(), handler.getDate(), handler.getImage(), handler.getDescription());
 
 
         System.out.println("All done");
+
     }
 
     @Override

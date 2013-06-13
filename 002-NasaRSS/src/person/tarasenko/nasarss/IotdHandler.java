@@ -1,27 +1,22 @@
 package person.tarasenko.nasarss;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import android.database.sqlite.SQLiteDoneException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class IotdHandler extends DefaultHandler {
-	/**
-	 * TODO: Change null to URL http://www.nasa.gov/rss/image_of_the_day.rss
-	 */
+
 	private String url = "http://www.nasa.gov/rss/image_of_the_day.rss";
 	private boolean inUrl = false;
 	private boolean inTitle = false;
@@ -74,12 +69,12 @@ public class IotdHandler extends DefaultHandler {
 
 	public void startElement(String uri, String localName, String qName,
 			Attributes attributes) throws SAXException {
-		if (localName.equals("url")) {
-			inUrl = true;
-		} else {
-			inUrl = false;
-		} // try without this line
-
+ // try without this line
+        if (localName.equals("url")) {
+            inUrl = true;
+        } else {
+            inUrl = false;
+        }
 		if (localName.startsWith("item")) {
 			inItem = true;
 		} else {
@@ -99,6 +94,8 @@ public class IotdHandler extends DefaultHandler {
 				} else {
 					inDate = false;
 				}
+
+
 
 			}
 		}

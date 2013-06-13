@@ -4,7 +4,7 @@
     <string name="app_name">NASA daily image</string>
     <string name="action_settings">Settings</string>
     <string name="test_description">This image from the NASA/ESA Hubble Space Telescope captures an ongoing cosmic collision between two galaxies a spiral galaxy is in the process of colliding with a lenticular galaxy. The image also reveals further evidence of the collision. There is a bright stream of stars coming out from the merging galaxies, extending out towards the top of the image. The bright spot in the middle of the plume, known as ESO 576&#8211;69, is what makes this image unique. This spot is believed to be the nucleus of the former spiral galaxy, which was ejected from the system during the collision and is now being shredded by tidal forces to produce the visible stellar stream. Image Credit: European Space Agency/NASA Hubble.</string>
-    <string name="test_title">Cosmic Collision Between Galaxies</string>
+    <string name="test_title">temp</string>
     <string name="test_publication_date">Tue, 04 Jun 2013 00:00:00 EDT</string>
     <color name="title">#ffffff</color>
     <color name="background">#000</color>
