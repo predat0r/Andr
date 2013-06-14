@@ -28,7 +28,7 @@ public class IotdHandler extends DefaultHandler {
     private Bitmap image = null;
     private String title = null;
     private String date = null;
-    private StringBuffer description = new StringBuffer();
+	private StringBuilder description = new StringBuilder();
 
     public boolean processFeed() {
         try {
@@ -40,12 +40,12 @@ public class IotdHandler extends DefaultHandler {
             InputStream inputStream = new URL(url).openStream();
             url = null;
             reader.parse(new InputSource(inputStream));
-            System.out.println("ProcessFeed done");
             return true;
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println("=== proxessFeed fail ===");
             Log.i("DEBUG", "URL = " + url);
+            System.out.println(e.getLocalizedMessage());
             throw new RuntimeException(e);
             //return false;
         }
@@ -102,10 +102,14 @@ public class IotdHandler extends DefaultHandler {
     }
 
     public void characters(char ch[], int start, int length) {
-        String chars = new String(ch).substring(start, start + length);
-        if (inTitle && title == null) { title = chars; }
-        if (inDescription && description.length() == 0) { description.append(chars); }
+		String chars = new String(ch).substring(start, start + length);
+
+		if (inUrl && url == null ){ image = getBitmap(chars);}
+		if (inTitle && title == null ){ title = chars;}
+        if (inDescription) { description.append(chars); }
         if (inDate && date == null) { date = chars; }
+
+
     }
 
     public Bitmap getImage() {
@@ -120,7 +124,7 @@ public class IotdHandler extends DefaultHandler {
         return date;
     }
 
-    public StringBuffer getDescription() {
+    public StringBuilder getDescription() {
         return description;
     }
 }

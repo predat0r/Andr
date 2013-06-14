@@ -13,8 +13,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //	String url = (String)findViewById(R.string.link);
+        setContentView(R.layout.activity_in_refresh);
         final IotdHandler handler = new IotdHandler();
 
         Thread prcessFeed = new Thread(new Runnable() {
@@ -26,11 +25,16 @@ public class MainActivity extends Activity {
         });
 
         prcessFeed.start();
-        try {
-            prcessFeed.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+//        try {
+//            prcessFeed.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+        while (prcessFeed.isAlive()){
+
         }
+        setContentView(R.layout.activity_main);
         resetDisplay(handler.getTitle(), handler.getDate(), handler.getImage(), handler.getDescription());
 
 
@@ -45,7 +49,7 @@ public class MainActivity extends Activity {
         return true;
     }
 
-    private void resetDisplay(String title, String date, Bitmap image, StringBuffer description) {
+    private void resetDisplay(String title, String date, Bitmap image, StringBuilder description) {
         TextView titleView = (TextView) findViewById(R.id.textTitle);
         titleView.setText(title);
 
