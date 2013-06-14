@@ -13,7 +13,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_in_refresh);
+        setContentView(R.layout.activity_main);
         final IotdHandler handler = new IotdHandler();
 
         Thread prcessFeed = new Thread(new Runnable() {
@@ -25,16 +25,12 @@ public class MainActivity extends Activity {
         });
 
         prcessFeed.start();
-//        try {
-//            prcessFeed.join();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
-        while (prcessFeed.isAlive()){
-
+        try {
+            prcessFeed.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        setContentView(R.layout.activity_main);
+
         resetDisplay(handler.getTitle(), handler.getDate(), handler.getImage(), handler.getDescription());
 
 
