@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
+import org.apache.http.conn.MultihomePlainSocketFactory;
 
 public class MainActivity extends Activity {
 
@@ -16,17 +17,18 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         final IotdHandler handler = new IotdHandler();
 
-        Thread prcessFeed = new Thread(new Runnable() {
+        Thread mProcessFeed = new Thread(new Runnable() {
             @Override
             public void run() {
                 handler.processFeed();
-
             }
         });
 
-        prcessFeed.start();
+
+
+        mProcessFeed.start();
         try {
-            prcessFeed.join();
+            mProcessFeed.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -59,6 +61,7 @@ public class MainActivity extends Activity {
         descriptionView.setText(description);
 
     }
+
 
 }
 
